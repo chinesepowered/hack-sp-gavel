@@ -17,7 +17,7 @@ const demoProjects =
         description:
             'Flood early-warning mesh: \$4 sensors on storm drains gossip water '
             'levels over LoRa and text neighbours before the street floods.',
-        quality: 2.1,
+        quality: 2.6,
       ),
       (
         name: 'MedMinder',
@@ -25,7 +25,7 @@ const demoProjects =
         description:
             'A pill bottle cap that knows if you took your meds and nudges your '
             'family on Signal when you did not.',
-        quality: 1.3,
+        quality: 1.1,
       ),
       (
         name: 'Sous',
@@ -33,7 +33,7 @@ const demoProjects =
         description:
             'Point your phone at your fridge; get three recipes that use what is '
             'about to expire, with a timer-driven cooking mode.',
-        quality: 0.9,
+        quality: 0.7,
       ),
       (
         name: 'Braille Buddy',
@@ -41,7 +41,7 @@ const demoProjects =
         description:
             'A 3D-printed refreshable braille cell plus a Flutter tutor app that '
             'teaches braille in ten minutes a day.',
-        quality: 1.9,
+        quality: 1.85,
       ),
       (
         name: 'GreenLight',
@@ -49,7 +49,7 @@ const demoProjects =
         description:
             'Reinforcement learning for traffic lights, trained on a SUMO model '
             'of our campus. 18% shorter waits in simulation.',
-        quality: 1.1,
+        quality: 0.9,
       ),
       (
         name: 'Lingo Loop',
@@ -73,7 +73,7 @@ const demoProjects =
         description:
             'Satellite imagery + crowdsourced photos to map urban tree cover and '
             'suggest where the city should plant next.',
-        quality: 1.5,
+        quality: 1.2,
       ),
       (
         name: 'Rover Rescue',
@@ -81,7 +81,7 @@ const demoProjects =
         description:
             'A cardboard search-and-rescue rover with thermal camera and a '
             'web dashboard that streams its map in real time.',
-        quality: 1.0,
+        quality: 0.8,
       ),
       (
         name: 'Budgie',
@@ -113,7 +113,7 @@ const demoProjects =
         description:
             'Predicts how crowded the next bus is from historical tap data and '
             'suggests a less crowded departure.',
-        quality: 0.6,
+        quality: 0.5,
       ),
       (
         name: 'SafeWalk',
@@ -152,7 +152,7 @@ const demoProjects =
         description:
             'Cheap PM2.5 sensors on bike couriers produce a street-level air '
             'quality map updated every five minutes.',
-        quality: 1.2,
+        quality: 1.0,
       ),
       (
         name: 'Mood Meter',
@@ -175,7 +175,7 @@ const demoProjects =
         description:
             'Neighbourhood map of community fridges with live stock levels '
             'reported by a camera on the door.',
-        quality: 0.7,
+        quality: 0.6,
       ),
       (
         name: 'Gesture Jam',
@@ -197,6 +197,6 @@ const demoProjects =
         description:
             'On-device sign language recognition that captions ASL fingerspelling '
             'in video calls.',
-        quality: 1.7,
+        quality: 2.2,
       ),
     ];

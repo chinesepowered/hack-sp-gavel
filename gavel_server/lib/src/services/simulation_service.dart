@@ -181,9 +181,9 @@ class SimulationService {
 
     // Time spent walking to and looking at the next table.
     final (minMs, maxMs) = switch (judge.simKind) {
-      'noisy' => (2000, 4500),
-      'contrarian' => (2500, 5000),
-      _ => (3000, 6500),
+      'noisy' => (1200, 2600),
+      'contrarian' => (1400, 3000),
+      _ => (1600, 3600),
     };
     final fresh = await Judge.db.findById(session, judge.id!);
     if (fresh != null) {

@@ -4,6 +4,7 @@ import 'dart:math' as math;
 import 'package:serverpod/serverpod.dart';
 
 import '../generated/protocol.dart';
+import '../ranking/bradley_terry.dart';
 import '../ranking/crowd_bt.dart';
 import '../ranking/podium.dart';
 
@@ -128,8 +129,13 @@ class LiveService {
     final leaderboard = buildLeaderboard(projects, votes);
     final projectById = {for (final p in projects) p.id!: p};
 
+    final agreement = leaveOneOutAgreement(projectById.keys, [
+      for (final v in votes)
+        (judge: v.judgeId, winner: v.winnerId, loser: v.loserId),
+    ]);
     final judgeSummaries = [
-      for (final judge in judges) _judgeSummary(judge, votes, projectById),
+      for (final judge in judges)
+        _judgeSummary(judge, agreement[judge.id] ?? 1, projectById),
     ];
 
     final active = projects.where((p) => p.active).toList();
@@ -225,19 +231,9 @@ class LiveService {
 
   static JudgeSummary _judgeSummary(
     Judge judge,
-    List<Vote> votes,
+    double agreement,
     Map<int, Project> projectById,
   ) {
-    final own = votes.where((v) => v.judgeId == judge.id);
-    var agree = 0;
-    var total = 0;
-    for (final vote in own) {
-      final winner = projectById[vote.winnerId];
-      final loser = projectById[vote.loserId];
-      if (winner == null || loser == null) continue;
-      total++;
-      if (winner.mu >= loser.mu) agree++;
-    }
     final current = judge.currentProjectId == null
         ? null
         : projectById[judge.currentProjectId!];
@@ -247,7 +243,7 @@ class LiveService {
       alpha: judge.alpha,
       beta: judge.beta,
       reliability: CrowdBT.reliability(judge.alpha, judge.beta),
-      agreement: total == 0 ? 1 : agree / total,
+      agreement: agreement,
       votesCast: judge.votesCast,
       skips: judge.skips,
       active: judge.active,

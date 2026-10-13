@@ -36,33 +36,33 @@ void main() {
       expect(update.sigmaSqLoser, lessThan(1));
     });
 
-    test('when comparing them then the expected information gain is positive',
-        () {
-      final gain = CrowdBT.expectedInformationGain(
-        alpha: CrowdBT.alphaPrior,
-        beta: CrowdBT.betaPrior,
-        muA: 0,
-        sigmaSqA: 1,
-        muB: 0,
-        sigmaSqB: 1,
-      );
-      expect(gain, greaterThan(0));
-    });
+    test(
+      'when comparing them then the expected information gain is positive',
+      () {
+        final gain = CrowdBT.expectedInformationGain(
+          alpha: CrowdBT.alphaPrior,
+          beta: CrowdBT.betaPrior,
+          muA: 0,
+          sigmaSqA: 1,
+          muB: 0,
+          sigmaSqB: 1,
+        );
+        expect(gain, greaterThan(0));
+      },
+    );
   });
 
   group('Given a settled project pair', () {
-    test(
-        'when choosing what to compare next then an uncertain project is '
+    test('when choosing what to compare next then an uncertain project is '
         'more informative than a settled one', () {
-      double gain(double mu, double sigmaSq) =>
-          CrowdBT.expectedInformationGain(
-            alpha: CrowdBT.alphaPrior,
-            beta: CrowdBT.betaPrior,
-            muA: 0,
-            sigmaSqA: 0.2,
-            muB: mu,
-            sigmaSqB: sigmaSq,
-          );
+      double gain(double mu, double sigmaSq) => CrowdBT.expectedInformationGain(
+        alpha: CrowdBT.alphaPrior,
+        beta: CrowdBT.betaPrior,
+        muA: 0,
+        sigmaSqA: 0.2,
+        muB: mu,
+        sigmaSqB: sigmaSq,
+      );
       expect(gain(0.1, 1.0), greaterThan(gain(0.1, 0.05)));
     });
   });
@@ -76,7 +76,10 @@ void main() {
 
     test('when judging finishes then the contrarian is the least trusted', () {
       final contrarian = result.reliability.last;
-      final honest = result.reliability.sublist(0, result.reliability.length - 1);
+      final honest = result.reliability.sublist(
+        0,
+        result.reliability.length - 1,
+      );
       expect(contrarian, lessThan(honest.reduce(math.min)));
     });
   });
@@ -111,7 +114,11 @@ void main() {
   final mu = List.filled(n, 0.0);
   final sigmaSq = List.filled(n, 1.0);
   final seen = List.filled(n, 0);
-  final kinds = [...List.filled(5, 'careful'), ...List.filled(4, 'noisy'), 'contrarian'];
+  final kinds = [
+    ...List.filled(5, 'careful'),
+    ...List.filled(4, 'noisy'),
+    'contrarian',
+  ];
   final alpha = List.filled(kinds.length, CrowdBT.alphaPrior);
   final beta = List.filled(kinds.length, CrowdBT.betaPrior);
   final previous = List<int?>.filled(kinds.length, null);
@@ -131,13 +138,13 @@ void main() {
           ? candidates.first
           : candidates.reduce((a, b) {
               double gain(int i) => CrowdBT.expectedInformationGain(
-                    alpha: alpha[j],
-                    beta: beta[j],
-                    muA: mu[prev],
-                    sigmaSqA: sigmaSq[prev],
-                    muB: mu[i],
-                    sigmaSqB: sigmaSq[i],
-                  );
+                alpha: alpha[j],
+                beta: beta[j],
+                muA: mu[prev],
+                sigmaSqA: sigmaSq[prev],
+                muB: mu[i],
+                sigmaSqB: sigmaSq[i],
+              );
               return gain(a) >= gain(b) ? a : b;
             });
       visited[j].add(next);
@@ -147,7 +154,7 @@ void main() {
         var pickNext = kinds[j] == 'contrarian'
             ? (random.nextDouble() < 0.9 ? diff < 0 : diff >= 0)
             : random.nextDouble() <
-                1 / (1 + math.exp(-diff * (kinds[j] == 'noisy' ? 1 : 3)));
+                  1 / (1 + math.exp(-diff * (kinds[j] == 'noisy' ? 1 : 3)));
         final w = pickNext ? next : prev;
         final l = pickNext ? prev : next;
         final u = CrowdBT.update(
@@ -170,7 +177,8 @@ void main() {
   }
 
   List<int> ranks(List<double> v) {
-    final order = List.generate(n, (i) => i)..sort((a, b) => v[b].compareTo(v[a]));
+    final order = List.generate(n, (i) => i)
+      ..sort((a, b) => v[b].compareTo(v[a]));
     final r = List.filled(n, 0);
     for (var k = 0; k < n; k++) {
       r[order[k]] = k;
@@ -187,7 +195,8 @@ void main() {
   return (
     spearman: 1 - 6 * d2 / (n * (n * n - 1)),
     reliability: [
-      for (var j = 0; j < kinds.length; j++) CrowdBT.reliability(alpha[j], beta[j]),
+      for (var j = 0; j < kinds.length; j++)
+        CrowdBT.reliability(alpha[j], beta[j]),
     ],
   );
 }
