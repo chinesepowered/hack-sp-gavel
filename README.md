@@ -6,9 +6,9 @@
 
 **Fair, live hackathon judging. Better or worse? That's the whole rubric.**
 
-[![Watch the demo](docs/media/demo-poster.png)](docs/media/gavel-demo.mp4)
+[![Watch the demo](docs/media/demo-poster.png)](https://www.youtube.com/watch?v=KL8ldWhuTlg)
 
-**[▶ Watch the demo video (1:51)](docs/media/gavel-demo.mp4)** · Built with **Serverpod 4** + Flutter · Voice by **ElevenLabs**
+**[▶ Watch the demo video (1:51)](https://www.youtube.com/watch?v=KL8ldWhuTlg)** · Built with **Serverpod 4** + Flutter · Voice by **ElevenLabs**
 
 </div>
 
