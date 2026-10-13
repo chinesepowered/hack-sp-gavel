@@ -84,38 +84,41 @@ Gavel is a single Serverpod 4 workspace (`gavel_server`, generated `gavel_client
 <p align="center"><img src="docs/media/architecture.png" alt="Architecture" width="900"></p>
 
 ```mermaid
-flowchart LR
-  subgraph Clients["Flutter web (one codebase)"]
+flowchart TB
+  subgraph Clients["Flutter web app"]
+    direction LR
     J["📱 Judge phone<br/>magic link · voice notes"]
     O["🖥️ Organizer console<br/>live dashboard"]
     B["📺 Big screen<br/>leaderboard · ceremony"]
   end
 
   subgraph SP["Serverpod 4 server"]
+    direction LR
     E["Endpoints<br/>judge · organizer · voice · results"]
     S["Streams + server events<br/>session.messages"]
-    R["Crowd-BT engine<br/>info-gain routing · reliability"]
+    R["Crowd-BT engine<br/>routing · reliability · podium"]
     F["Future calls<br/>simulation · auto-close · cleanup"]
-    W["Web server<br/>landing · /results · /j/ links · app"]
     A["Auth module<br/>email + anonymous"]
+    W["Web server<br/>landing · results · /j/ links · app"]
   end
 
-  DB[("PostgreSQL<br/>ORM · row locks")]
-  CS[("Cloud storage<br/>narrations")]
-  EL["ElevenLabs<br/>Scribe STT · TTS"]
+  subgraph Data["Storage & services"]
+    direction LR
+    DB[("PostgreSQL<br/>ORM · row locks")]
+    CS[("Cloud storage<br/>narrations")]
+    EL["ElevenLabs<br/>Scribe STT · TTS"]
+  end
 
-  J -- "typed RPC" --> E
-  O -- "typed RPC" --> E
-  O <-. "WebSocket stream" .-> S
-  B <-. "WebSocket stream" .-> S
-  J <-. "re-routing stream" .-> S
-  E --> R --> DB
-  E --> S
+  Clients -- "typed RPC" --> E
+  S -. "WebSocket streams" .-> Clients
+  E --> R
   F --> R
+  E --> S
   E --> A
+  R --> DB
   W --> DB
-  E --> EL
   E --> CS
+  E --> EL
 ```
 
 ### What happens when a judge votes
@@ -129,11 +132,11 @@ sequenceDiagram
   participant OC as Organizer console
 
   P->>JE: vote(token, VoteChoice.current)
-  JE->>DB: BEGIN; lock judge + both projects FOR UPDATE
-  JE->>JE: Crowd-BT update (μ, σ² of both projects; α, β of judge)
-  JE->>DB: insert Vote, Visit, ScoreSnapshot; update rows
+  JE->>DB: BEGIN, lock judge and both projects FOR UPDATE
+  JE->>JE: Crowd-BT update of both projects (μ, σ²) and the judge (α, β)
+  JE->>DB: insert Vote, Visit, ScoreSnapshot and update rows
   JE->>JE: choose next project by expected information gain
-  JE->>DB: assign next table; COMMIT
+  JE->>DB: assign next table, COMMIT
   JE->>MSG: postMessage(LivePing)
   JE-->>P: JudgeState (go to Table 7…)
   MSG-->>OC: stream → fresh LiveSnapshot (leaderboard, podium certainty, judges)
