@@ -1,0 +1,4 @@
+### Server event posted whenever something changes in an event.
+class: LivePing
+fields:
+  eventId: int

@@ -1,0 +1,8 @@
+class: PublicResults
+fields:
+  eventName: String
+  tagline: String?
+  status: EventStatus
+  entries: List<LeaderboardEntry>
+  totalVotes: int
+  judgeCount: int

@@ -1,0 +1,5 @@
+### Which project a judge preferred in a pairwise comparison.
+enum: VoteChoice
+values:
+  - previous
+  - current

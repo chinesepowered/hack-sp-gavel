@@ -1,0 +1,8 @@
+class: ProjectDetail
+fields:
+  project: Project
+  rank: int
+  sigma: double
+  wins: int
+  losses: int
+  notes: List<NoteView>

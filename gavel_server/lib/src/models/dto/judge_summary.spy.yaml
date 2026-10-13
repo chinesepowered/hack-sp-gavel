@@ -1,0 +1,17 @@
+class: JudgeSummary
+fields:
+  id: int
+  name: String
+  alpha: double
+  beta: double
+  ### alpha / (alpha + beta): how often this judge agrees with the consensus.
+  reliability: double
+  ### Fraction of this judge's votes that agree with the current consensus.
+  agreement: double
+  votesCast: int
+  skips: int
+  active: bool
+  isSimulated: bool
+  currentProjectName: String?
+  currentLocation: String?
+  lastActiveAt: DateTime?

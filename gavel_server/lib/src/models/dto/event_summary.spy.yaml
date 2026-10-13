@@ -1,0 +1,12 @@
+### Compact event info for the organizer's event list.
+class: EventSummary
+fields:
+  id: int
+  name: String
+  slug: String
+  status: EventStatus
+  isDemo: bool
+  projectCount: int
+  judgeCount: int
+  voteCount: int
+  createdAt: DateTime

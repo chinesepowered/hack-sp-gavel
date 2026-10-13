@@ -1,0 +1,9 @@
+### What a judge sees about a project.
+class: ProjectCard
+fields:
+  id: int
+  name: String
+  location: String
+  description: String
+  team: String?
+  link: String?

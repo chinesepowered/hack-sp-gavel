@@ -1,0 +1,30 @@
+services:
+  # Development services
+  postgres:
+    image: ghcr.io/serverpod/postgres:16
+    ports:
+      - "8090:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: gavel
+      POSTGRES_PASSWORD: "oNbEwP4t2En20yUv0VNJaYrPyzKvbOwV"
+    volumes:
+      - gavel_data:/var/lib/postgresql/data
+
+
+  # Test services
+  postgres_test:
+    image: ghcr.io/serverpod/postgres:16
+    ports:
+      - "9090:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: gavel_test
+      POSTGRES_PASSWORD: "cS4DB20kc3EWRGO1wtbqmYx7XzF99Ml5"
+    volumes:
+      - gavel_test_data:/var/lib/postgresql/data
+
+
+volumes:
+  gavel_data:
+  gavel_test_data:

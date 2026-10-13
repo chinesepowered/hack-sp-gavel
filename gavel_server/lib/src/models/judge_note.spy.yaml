@@ -1,0 +1,13 @@
+### A note a judge left about a project, typed or dictated (ElevenLabs STT).
+class: JudgeNote
+table: judge_note
+fields:
+  eventId: int, relation(parent=event, onDelete=Cascade)
+  judgeId: int, relation(parent=judge, onDelete=Cascade)
+  projectId: int, relation(parent=project, onDelete=Cascade)
+  text: String
+  source: NoteSource
+  createdAt: DateTime, default=now
+indexes:
+  judge_note_project_idx:
+    fields: projectId

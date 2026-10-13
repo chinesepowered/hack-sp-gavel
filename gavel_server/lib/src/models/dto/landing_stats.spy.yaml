@@ -1,0 +1,6 @@
+### Cached numbers for the landing page.
+class: LandingStats
+fields:
+  events: int
+  projects: int
+  votes: int

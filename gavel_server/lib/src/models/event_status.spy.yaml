@@ -1,0 +1,6 @@
+### Lifecycle of a judging event.
+enum: EventStatus
+values:
+  - setup
+  - live
+  - closed

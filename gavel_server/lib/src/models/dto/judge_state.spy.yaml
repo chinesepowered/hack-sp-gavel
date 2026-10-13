@@ -1,0 +1,16 @@
+### Everything the judge's phone needs to render the current step.
+class: JudgeState
+fields:
+  judgeId: int
+  judgeName: String
+  eventName: String
+  eventStatus: EventStatus
+  phase: JudgePhase
+  current: ProjectCard?
+  previous: ProjectCard?
+  votesCast: int
+  projectsSeen: int
+  projectsTotal: int
+  ### Short message for the judge (e.g. "Table 7 was marked absent, rerouted").
+  notice: String?
+  voiceNotesEnabled: bool

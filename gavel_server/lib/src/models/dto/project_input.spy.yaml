@@ -1,0 +1,7 @@
+class: ProjectInput
+fields:
+  name: String
+  location: String
+  description: String
+  team: String?
+  link: String?

@@ -1,0 +1,8 @@
+### Public info shown on the judge join screen.
+class: EventPublicInfo
+fields:
+  name: String
+  tagline: String?
+  status: EventStatus
+  projectCount: int
+  judgeCount: int

@@ -1,0 +1,13 @@
+### Additional organizers who claimed an event through its admin link.
+class: EventOrganizer
+table: event_organizer
+fields:
+  eventId: int, relation(parent=event, onDelete=Cascade)
+  userId: UuidValue
+  createdAt: DateTime, default=now
+indexes:
+  event_organizer_unique_idx:
+    fields: eventId, userId
+    unique: true
+  event_organizer_user_idx:
+    fields: userId

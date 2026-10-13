@@ -1,0 +1,18 @@
+class: LeaderboardEntry
+fields:
+  projectId: int
+  rank: int
+  name: String
+  location: String
+  team: String?
+  mu: double
+  sigma: double
+  timesSeen: int
+  active: bool
+  prioritized: bool
+  absentReports: int
+  ### Monte Carlo estimate of the probability this project truly belongs on
+  ### the podium (top 3), given the current posteriors.
+  podiumProbability: double
+  wins: int
+  losses: int

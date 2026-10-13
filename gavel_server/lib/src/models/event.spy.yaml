@@ -1,0 +1,40 @@
+### A judging event (a hackathon expo, a science fair, a pitch night...).
+class: Event
+table: event
+fields:
+  name: String
+  tagline: String?
+  ### Public, URL-safe identifier used for share links and the results page.
+  slug: String
+  ### Short code judges type (or scan) to join.
+  judgeCode: String
+  ### Secret that grants organizer access to whoever holds the admin link.
+  adminKey: String?, scope=serverOnly
+  ### The auth user that created the event.
+  ownerId: UuidValue?
+  status: EventStatus, default=setup
+  ### Every project should be seen at least this many times before the
+  ### ranking engine optimizes purely for information gain.
+  minViews: int, default=2
+  ### A project a judge was sent to counts as busy for this long.
+  assignmentTimeoutMinutes: int, default=5
+  ### When set, judging closes automatically at this time (future call).
+  closesAt: DateTime?
+  ### When the public results page is visible.
+  resultsPublished: bool, default=false
+  ### Sandbox events created from "Try the demo"; expire after 24h.
+  isDemo: bool, default=false
+  simulationRunning: bool, default=false
+  ### Public URL of the ElevenLabs awards announcement, once generated.
+  announcementUrl: String?
+  announcementScript: String?
+  createdAt: DateTime, default=now
+indexes:
+  event_slug_idx:
+    fields: slug
+    unique: true
+  event_judge_code_idx:
+    fields: judgeCode
+    unique: true
+  event_owner_idx:
+    fields: ownerId

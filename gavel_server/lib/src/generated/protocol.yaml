@@ -1,0 +1,57 @@
+anonymousIdp:
+  - login:
+emailIdp:
+  - login:
+  - startRegistration:
+  - verifyRegistrationCode:
+  - finishRegistration:
+  - startPasswordReset:
+  - verifyPasswordResetCode:
+  - finishPasswordReset:
+  - hasAccount:
+jwtRefresh:
+  - refreshAccessToken:
+judge:
+  - lookup:
+  - join:
+  - state:
+  - begin:
+  - finishFirstVisit:
+  - vote:
+  - skip:
+  - addNote:
+  - watch:
+organizer:
+  - createEvent:
+  - createDemoEvent:
+  - myEvents:
+  - getEvent:
+  - claimEvent:
+  - updateEvent:
+  - setStatus:
+  - scheduleClose:
+  - publishResults:
+  - deleteEvent:
+  - projects:
+  - addProject:
+  - importProjects:
+  - updateProject:
+  - setProjectActive:
+  - setProjectPrioritized:
+  - deleteProject:
+  - projectDetail:
+  - addJudge:
+  - judgeLink:
+  - setJudgeActive:
+  - startSimulation:
+  - stopSimulation:
+  - watch:
+  - snapshot:
+  - convergence:
+  - announceWinners:
+  - exportCsv:
+results:
+  - get:
+voice:
+  - available:
+  - transcribeNote:

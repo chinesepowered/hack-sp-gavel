@@ -1,0 +1,12 @@
+### One pairwise comparison: [judgeId] preferred [winnerId] over [loserId].
+class: Vote
+table: vote
+fields:
+  eventId: int, relation(parent=event, onDelete=Cascade)
+  judgeId: int, relation(parent=judge, onDelete=Cascade)
+  winnerId: int, relation(parent=project, onDelete=Cascade)
+  loserId: int, relation(parent=project, onDelete=Cascade)
+  createdAt: DateTime, default=now
+indexes:
+  vote_event_idx:
+    fields: eventId

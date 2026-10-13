@@ -1,0 +1,7 @@
+### mu over time for one project, sampled at vote numbers.
+class: ConvergenceSeries
+fields:
+  projectId: int
+  name: String
+  voteNumbers: List<int>
+  mus: List<double>

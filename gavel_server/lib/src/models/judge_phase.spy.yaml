@@ -1,0 +1,15 @@
+### What the judge's phone should be showing right now.
+enum: JudgePhase
+values:
+  ### Joined, has not started yet.
+  - ready
+  ### Visiting the very first project (nothing to compare against yet).
+  - visit
+  ### Visiting a project that will be compared with the previous one.
+  - compare
+  ### Every available project has been seen by this judge.
+  - finished
+  ### Judging is not open (event in setup or closed).
+  - closed
+  ### The organizer paused this judge.
+  - inactive

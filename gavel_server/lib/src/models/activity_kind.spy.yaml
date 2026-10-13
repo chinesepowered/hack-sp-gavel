@@ -1,0 +1,9 @@
+enum: ActivityKind
+values:
+  - vote
+  - skip
+  - join
+  - note
+  - project
+  - status
+  - simulation

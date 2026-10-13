@@ -1,0 +1,6 @@
+class: NoteView
+fields:
+  judgeName: String
+  text: String
+  source: NoteSource
+  createdAt: DateTime

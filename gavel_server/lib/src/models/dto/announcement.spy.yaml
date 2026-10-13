@@ -1,0 +1,6 @@
+### The awards ceremony script and its ElevenLabs narration.
+class: Announcement
+fields:
+  script: String
+  audioUrl: String?
+  podium: List<LeaderboardEntry>

@@ -1,0 +1,15 @@
+### A project a judge has already been sent to (judged or skipped), so it is
+### never assigned to them again.
+class: Visit
+table: visit
+fields:
+  eventId: int, relation(parent=event, onDelete=Cascade)
+  judgeId: int, relation(parent=judge, onDelete=Cascade)
+  projectId: int, relation(parent=project, onDelete=Cascade)
+  outcome: VisitOutcome
+  skipReason: SkipReason?
+  createdAt: DateTime, default=now
+indexes:
+  visit_judge_project_idx:
+    fields: judgeId, projectId
+    unique: true

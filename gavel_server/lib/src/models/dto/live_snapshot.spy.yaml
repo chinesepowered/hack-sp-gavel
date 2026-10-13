@@ -1,0 +1,20 @@
+### Full live state of an event, streamed to organizer dashboards.
+class: LiveSnapshot
+fields:
+  eventId: int
+  status: EventStatus
+  simulationRunning: bool
+  resultsPublished: bool
+  leaderboard: List<LeaderboardEntry>
+  judges: List<JudgeSummary>
+  activity: List<ActivityItem>
+  totalVotes: int
+  activeJudges: int
+  ### Probability the current top 3 is the true top 3 (Monte Carlo).
+  podiumCertainty: double
+  ### Average number of views per active project.
+  averageViews: double
+  ### Fraction of active projects that reached the minimum number of views.
+  coverage: double
+  closesAt: DateTime?
+  serverTime: DateTime

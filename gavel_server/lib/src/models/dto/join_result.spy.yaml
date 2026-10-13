@@ -1,0 +1,4 @@
+class: JoinResult
+fields:
+  token: String
+  state: JudgeState

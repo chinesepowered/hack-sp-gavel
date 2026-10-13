@@ -1,0 +1,27 @@
+### A project (team / table) competing in an event.
+class: Project
+table: project
+fields:
+  eventId: int, relation(parent=event, onDelete=Cascade)
+  name: String
+  ### Where judges find it, e.g. "Table 12".
+  location: String
+  description: String
+  team: String?
+  link: String?
+  ### Crowd-BT posterior: mean quality estimate.
+  mu: double, default=0.0
+  ### Crowd-BT posterior: variance of the quality estimate.
+  sigmaSq: double, default=1.0
+  ### Inactive projects are never assigned (absent, withdrawn...).
+  active: bool, default=true
+  ### Prioritized projects are visited before everything else.
+  prioritized: bool, default=false
+  timesSeen: int, default=0
+  absentReports: int, default=0
+  ### Hidden ground-truth quality used only by demo simulations.
+  simTrueScore: double?, scope=serverOnly
+  createdAt: DateTime, default=now
+indexes:
+  project_event_idx:
+    fields: eventId

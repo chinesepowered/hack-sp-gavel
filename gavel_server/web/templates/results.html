@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{eventName}} — results · Gavel</title>
+  <link rel="icon" href="{{{@/web/images/gavel.svg}}}" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=JetBrains+Mono:wght@400;600&family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{{@/web/css/gavel.css}}}">
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav">
+      <a class="brand" href="/"><img src="{{{@/web/images/gavel.svg}}}" alt=""><span>Gavel</span></a>
+    </nav>
+    <header class="results-head">
+      <div class="eyebrow">{{#isClosed}}Final results{{/isClosed}}{{^isClosed}}<i class="live-dot"></i>Live results{{/isClosed}}</div>
+      <h1>{{eventName}}</h1>
+      {{#hasTagline}}<p class="lede">{{tagline}}</p>{{/hasTagline}}
+      <p class="lede">Ranked from {{totalVotes}} head-to-head comparisons by {{judgeCount}} judges.</p>
+    </header>
+    <div>
+      {{#entries}}
+      <div class="result-row {{#podium}}podium{{/podium}} {{medal}}">
+        <div class="rank">{{rank}}</div>
+        <div><div class="name">{{name}}</div><div class="meta">{{location}}{{#team}} &middot; {{team}}{{/team}}</div></div>
+        <div class="bar"><i style="width: {{width}}%"></i></div>
+      </div>
+      {{/entries}}
+    </div>
+    <footer>
+      <span>Ranked with Crowd-BT on Serverpod</span>
+      <a href="/">Run your own judging with Gavel &rarr;</a>
+    </footer>
+  </div>
+</body>
+</html>

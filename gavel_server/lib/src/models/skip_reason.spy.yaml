@@ -1,0 +1,6 @@
+### Why a judge skipped the project they were sent to.
+enum: SkipReason
+values:
+  - absent
+  - conflict
+  - busy

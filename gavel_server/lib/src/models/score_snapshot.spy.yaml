@@ -1,0 +1,14 @@
+### A project's posterior after a vote, for the convergence chart.
+class: ScoreSnapshot
+table: score_snapshot
+fields:
+  eventId: int, relation(parent=event, onDelete=Cascade)
+  projectId: int, relation(parent=project, onDelete=Cascade)
+  mu: double
+  sigmaSq: double
+  ### Total number of votes in the event when the snapshot was taken.
+  voteNumber: int
+  createdAt: DateTime, default=now
+indexes:
+  score_snapshot_event_idx:
+    fields: eventId, voteNumber

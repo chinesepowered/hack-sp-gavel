@@ -1,0 +1,5 @@
+class: ActivityItem
+fields:
+  kind: ActivityKind
+  message: String
+  at: DateTime

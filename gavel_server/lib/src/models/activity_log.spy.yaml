@@ -1,0 +1,11 @@
+### Live activity feed shown on the organizer dashboard.
+class: ActivityLog
+table: activity_log
+fields:
+  eventId: int, relation(parent=event, onDelete=Cascade)
+  kind: ActivityKind
+  message: String
+  createdAt: DateTime, default=now
+indexes:
+  activity_log_event_idx:
+    fields: eventId, createdAt

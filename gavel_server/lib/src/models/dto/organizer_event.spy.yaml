@@ -1,0 +1,6 @@
+### Everything an organizer needs to run an event.
+class: OrganizerEvent
+fields:
+  event: Event
+  adminKey: String
+  isOwner: bool

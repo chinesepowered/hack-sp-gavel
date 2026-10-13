@@ -1,0 +1,31 @@
+### A judge seat in an event. Judges authenticate with the secret token in
+### their personal magic link, so they never need an account.
+class: Judge
+table: judge
+fields:
+  eventId: int, relation(parent=event, onDelete=Cascade)
+  name: String
+  token: String?, scope=serverOnly
+  ### Crowd-BT judge reliability prior/posterior: Beta(alpha, beta).
+  alpha: double, default=5.0
+  beta: double, default=1.0
+  active: bool, default=true
+  ### The project the judge is currently walking to / looking at.
+  currentProjectId: int?, relation(parent=project, onDelete=SetNull)
+  ### The last project the judge judged (the comparison anchor).
+  previousProjectId: int?, relation(parent=project, onDelete=SetNull)
+  assignedAt: DateTime?
+  votesCast: int, default=0
+  skips: int, default=0
+  isSimulated: bool, default=false
+  ### careful | noisy | contrarian (demo simulation persona).
+  simKind: String?, scope=serverOnly
+  simNextActionAt: DateTime?, scope=serverOnly
+  createdAt: DateTime, default=now
+  lastActiveAt: DateTime?
+indexes:
+  judge_event_idx:
+    fields: eventId
+  judge_token_idx:
+    fields: token
+    unique: true
