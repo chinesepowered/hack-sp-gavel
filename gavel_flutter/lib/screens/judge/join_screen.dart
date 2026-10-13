@@ -162,7 +162,8 @@ class _JoinScreenState extends State<JoinScreen> {
       ],
       const SizedBox(height: 18),
       Text(
-        '${info.projectCount} projects · ${info.judgeCount} judges so far',
+        '${info.projectCount} project${info.projectCount == 1 ? '' : 's'} · '
+        '${info.judgeCount} judge${info.judgeCount == 1 ? '' : 's'} so far',
         style: G.mono(size: 13, color: G.muted),
       ),
       const SizedBox(height: 28),

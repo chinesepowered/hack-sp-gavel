@@ -554,6 +554,16 @@ class _Choice extends StatefulWidget {
 class _ChoiceState extends State<_Choice> {
   bool _pressed = false;
 
+  /// Shrinks long single words so they never break mid-word in the card.
+  static double _nameSize(String name) {
+    final longest = name
+        .split(RegExp(r'\s+'))
+        .fold<int>(0, (m, w) => w.length > m ? w.length : m);
+    if (longest >= 12) return 17;
+    if (longest >= 9) return 20;
+    return 24;
+  }
+
   @override
   Widget build(BuildContext context) {
     final accent = widget.highlight ? G.brass : G.paper;
@@ -585,7 +595,7 @@ class _ChoiceState extends State<_Choice> {
                 widget.project.name,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: G.serif(size: 24),
+                style: G.serif(size: _nameSize(widget.project.name)),
               ),
               const SizedBox(height: 6),
               Text(

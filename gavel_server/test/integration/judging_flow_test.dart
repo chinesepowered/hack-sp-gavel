@@ -169,6 +169,26 @@ void main() {
       },
     );
 
+    test(
+      'when an organizer pauses a table then judges heading there are re-routed',
+      () async {
+        final event = await liveEvent();
+        final join = await endpoints.judge.join(
+          sessionBuilder,
+          event.event.judgeCode,
+          'Margaret',
+        );
+        final before = await endpoints.judge.begin(sessionBuilder, join.token);
+        final target = before.current!.id;
+
+        await endpoints.organizer.setProjectActive(organizer, target, false);
+
+        final after = await endpoints.judge.state(sessionBuilder, join.token);
+        expect(after.current, isNotNull);
+        expect(after.current!.id, isNot(target));
+      },
+    );
+
     test('when judging is closed then judges cannot vote', () async {
       final event = await liveEvent();
       final join = await endpoints.judge.join(

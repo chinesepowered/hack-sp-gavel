@@ -1,7 +1,8 @@
-# Flutter & Serverpod project
+# Gavel: Flutter & Serverpod project
 
-This project is a Flutter app (frontend) backed by a Serverpod server (backend). Always build the app's backend with Serverpod.
-Build for multiple users, use Serverpod's built-in authentication, which is already set up in `lib/server.dart`.
+Gavel is a hackathon judging app. Judges compare projects pairwise on their phones (magic-link tokens, no account); a Crowd-BT engine (`gavel_server/lib/src/ranking/`) updates project and judge posteriors in row-locked transactions (`lib/src/services/judging_service.dart`) and picks each judge's next table by expected information gain. Organizers (email or anonymous auth, `requireLogin`) watch a live dashboard streamed via `session.messages` + streaming endpoints (`lib/src/services/live_service.dart`). Future calls drive demo simulations, scheduled auto-close and recurring cleanup. ElevenLabs (key in passwords as `elevenLabsApiKey`) powers judge voice notes (Scribe) and the narrated awards ceremony, cached in cloud storage. The web server renders the landing page, `/results/<slug>` and `/j/<code>` QR links, and hosts the Flutter app at `/app`.
+
+Key places: endpoints in `gavel_server/lib/src/endpoints/`, models in `lib/src/models/`, Flutter screens in `gavel_flutter/lib/screens/{judge,organizer}/`, widgets in `gavel_flutter/lib/widgets/`. Local secrets: copy `config/passwords.example.yaml` to `config/passwords.yaml`.
 
 The user starts the server and Flutter app with `serverpod start`. There is no need to check if the server is running: make the changes and call the `serverpod` MCP tools as needed. If the server is not running, an informative error message will be received from the MCP server. Then STOP and ask the user to start it. NEVER start the server yourself. The Flutter app is started along with it, or can be launched from the MCP tool `spawn_flutter_app`.
 
@@ -46,5 +47,3 @@ If the user asks you to test the app:
 3. Use `flutter_driver` (`dart` MCP) to navigate through the app
 
 The app is launched from `gavel_flutter/lib/driver.dart`, which starts the Flutter driver extension with text entry emulation turned off so the app stays usable by hand. To let the driver type, set `enableTextEntryEmulation: true` there and `hot_restart` the app.
-
-IMPORTANT: After building the first version of the app, update this AGENTS.md file with information about the app we're building. KEEP the info about the MCP server and the checklist. Remove this paragraph.

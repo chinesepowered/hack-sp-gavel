@@ -39,7 +39,7 @@ class _DashboardScreenState extends State<DashboardScreen>
   Timer? _clock;
   DateTime _now = DateTime.now().toUtc();
   bool _busy = false;
-  int _simJudges = 12;
+  int _simJudges = 16;
 
   Event? get _event => _view?.event;
 
@@ -479,7 +479,7 @@ class _DashboardScreenState extends State<DashboardScreen>
                 for (final n in [6, 8, 12, 16])
                   DropdownMenuItem(value: n, child: Text('$n judges')),
               ],
-              onChanged: (v) => setState(() => _simJudges = v ?? 12),
+              onChanged: (v) => setState(() => _simJudges = v ?? 16),
             ),
             FilledButton.icon(
               key: const Key('start-simulation'),
